@@ -1,15 +1,17 @@
-const DEMO_USER='admin', DEMO_PASS='Admin123!';
-const rupiah=n=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n);
-const defaultProducts=[{id:1,name:'Spotify Premium 1 Bulan',category:'Langganan',price:15000,description:'Akses premium 1 bulan.',active:true},{id:2,name:'Canva Pro 1 Bulan',category:'Tools',price:12000,description:'Template dan fitur Pro.',active:true},{id:3,name:'Disney+ 1 Bulan',category:'Streaming',price:18000,description:'Paket streaming digital.',active:true},{id:4,name:'ChatGPT Plus',category:'AI',price:25000,description:'Paket AI premium.',active:true},{id:5,name:'YouTube Premium',category:'Streaming',price:17000,description:'Streaming tanpa iklan.',active:true},{id:6,name:'CapCut Pro',category:'Tools',price:13000,description:'Fitur editing premium.',active:true},{id:7,name:'Game Voucher',category:'Game',price:20000,description:'Voucher digital demo.',active:true},{id:8,name:'Notion Plus',category:'Tools',price:14000,description:'Fitur produktivitas premium.',active:true}];
-if(!localStorage.getItem('lm_products'))localStorage.setItem('lm_products',JSON.stringify(defaultProducts));
-const products=()=>JSON.parse(localStorage.getItem('lm_products')||'[]');const orders=()=>JSON.parse(localStorage.getItem('lm_orders')||'[]');
-const loginView=document.querySelector('#loginView'),dash=document.querySelector('#dashboardView');
-function logged(){return sessionStorage.getItem('lm_admin')==='1'}
-function showDash(){loginView.classList.add('hidden');dash.classList.remove('hidden');render()}
-if(logged())showDash();
-document.querySelector('#loginForm').addEventListener('submit',e=>{e.preventDefault();let f=new FormData(e.target);if(f.get('username')===DEMO_USER&&f.get('password')===DEMO_PASS){sessionStorage.setItem('lm_admin','1');showDash()}else document.querySelector('#loginError').textContent='Username atau password salah.'});
-document.querySelector('#logoutBtn').onclick=()=>{sessionStorage.removeItem('lm_admin');location.reload()};
-function render(){let ps=products(),os=orders();document.querySelector('#aProducts').textContent=ps.filter(p=>p.active).length;document.querySelector('#aOrders').textContent=os.length;document.querySelector('#aRevenue').textContent=rupiah(os.reduce((s,o)=>s+Number(o.total||0),0));document.querySelector('#productTable').innerHTML=ps.map(p=>`<tr><td><b>${p.name}</b></td><td>${p.category}</td><td>${rupiah(p.price)}</td><td><span class="status ${p.active?'':'off'}">${p.active?'Aktif':'Nonaktif'}</span></td><td><button class="action" data-edit="${p.id}">Edit</button><button class="action" data-toggle="${p.id}">${p.active?'Nonaktifkan':'Aktifkan'}</button><button class="action" data-delete="${p.id}">Hapus</button></td></tr>`).join('')||'<tr><td colspan="5">Belum ada produk.</td></tr>';document.querySelector('#orderTable').innerHTML=os.slice(0,30).map(o=>{let names=o.items.map(i=>{let p=ps.find(x=>x.id===i.id);return `${p?.name||'Produk'} ×${i.qty}`}).join(', ');return `<tr><td>${o.id}</td><td>${o.name}<br><small>${o.phone}</small></td><td>${names}</td><td>${rupiah(o.total)}</td><td><span class="status off">${o.status}</span></td></tr>`}).join('')||'<tr><td colspan="5">Belum ada pesanan.</td></tr>'}
-const modal=document.querySelector('#productModal'),form=document.querySelector('#productForm');document.querySelector('#addProductBtn').onclick=()=>{form.reset();form.id.value='';document.querySelector('#productModalTitle').textContent='Tambah Produk';modal.classList.add('show')};document.querySelector('#closeProduct').onclick=()=>modal.classList.remove('show');
-document.addEventListener('click',e=>{let id=+(e.target.dataset.edit||e.target.dataset.toggle||e.target.dataset.delete||0);if(!id)return;let ps=products(),p=ps.find(x=>x.id===id);if(e.target.dataset.edit){form.id.value=p.id;form.name.value=p.name;form.category.value=p.category;form.price.value=p.price;form.description.value=p.description||'';form.active.checked=p.active;document.querySelector('#productModalTitle').textContent='Edit Produk';modal.classList.add('show')}if(e.target.dataset.toggle){p.active=!p.active;localStorage.setItem('lm_products',JSON.stringify(ps));render()}if(e.target.dataset.delete&&confirm('Hapus produk ini?')){localStorage.setItem('lm_products',JSON.stringify(ps.filter(x=>x.id!==id)));render()}});
-form.addEventListener('submit',e=>{e.preventDefault();let f=new FormData(form),ps=products(),id=Number(f.get('id'));let data={id:id||Date.now(),name:f.get('name'),category:f.get('category'),price:Number(f.get('price')),description:f.get('description'),active:f.get('active')==='on',emoji:'🌸'};if(id){let i=ps.findIndex(p=>p.id===id);data.emoji=ps[i].emoji||'🌸';ps[i]=data}else ps.unshift(data);localStorage.setItem('lm_products',JSON.stringify(ps));modal.classList.remove('show');render()});
+const form=document.getElementById("loginForm");
+const error=document.getElementById("error");
+
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  const username=document.getElementById("username").value.trim();
+  const password=document.getElementById("password").value;
+  // Demo saja. Ganti dengan sistem autentikasi server sebelum dipakai sungguhan.
+  if(username==="admin" && password==="admin123"){
+    sessionStorage.setItem("lilacmart_admin","1");
+    error.style.color="#2e7d32";
+    error.textContent="Login berhasil. Panel admin demo siap.";
+    setTimeout(()=>alert("Login berhasil. Untuk keamanan, autentikasi nyata perlu backend/server."),100);
+  }else{
+    error.textContent="Username atau password salah.";
+  }
+});

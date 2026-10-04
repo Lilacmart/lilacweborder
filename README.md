@@ -1,31 +1,19 @@
-# Lilacmart Auto Order — GitHub Ready
+# Lilacmart Website
 
-Template toko digital bergaya pink/cream seperti referensi gambar, dengan katalog, keranjang, checkout demo, dan panel admin.
+File utama:
+- `index.html` — halaman toko
+- `style.css` — gaya halaman toko
+- `script.js` — produk dan tombol WhatsApp
+- `admin.html` — halaman login admin demo
+- `admin.css` — gaya admin
+- `admin.js` — login demo
 
-## File
-- `index.html` — halaman toko/customer
-- `admin.html` — login + dashboard admin
-- `style.css` — seluruh tampilan/responsive
-- `app.js` — katalog, keranjang, checkout demo
-- `admin.js` — autentikasi demo + CRUD produk + daftar pesanan
+## GitHub Pages
+Upload keenam file ke root repository. Pastikan nama file persis:
+`index.html`, `style.css`, `script.js`, `admin.html`, `admin.css`, `admin.js`.
 
-## Login Admin Demo
-- Link: `admin.html`
-- Username: `admin`
-- Password: `Admin123!`
+## Login demo
+Username: `admin`
+Password: `admin123`
 
-Jika di GitHub Pages, setelah website aktif link admin adalah:
-`https://USERNAME.github.io/NAMA-REPO/admin.html`
-
-## Cara upload ke GitHub
-1. Buat repository baru di GitHub.
-2. Upload semua file pada folder ini ke root repository.
-3. Masuk `Settings > Pages`.
-4. Pilih `Deploy from a branch`, branch `main`, folder `/ (root)`.
-5. Buka URL GitHub Pages yang diberikan GitHub.
-6. Tambahkan `/admin.html` untuk panel admin.
-
-## Penting untuk produksi
-Versi ini sengaja dibuat tanpa backend agar langsung bisa dijalankan dari GitHub Pages. Login admin dan data menggunakan `localStorage/sessionStorage`, sehingga **bukan sistem keamanan produksi**. Password dapat dilihat dari source code browser. Untuk toko sungguhan, gunakan backend/database, autentikasi server-side, HTTPS, dan payment gateway resmi.
-
-Checkout saat ini membuat order demo di browser. Untuk auto order sungguhan, endpoint backend perlu ditambahkan untuk pembayaran, verifikasi webhook, stok/delivery, dan status pesanan.
+Catatan: login di atas hanya demo sisi browser, bukan sistem keamanan untuk produksi. Untuk panel admin sungguhan diperlukan backend/database dan autentikasi server.
