@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lilacmart Store — Auto Order</title>
+  <meta name="description" content="Marketplace digital premium dengan sistem auto order." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand-avatar">🌸</span>
+      <span><b>Lilacmart</b> <strong>Store</strong><small>✦ Official Marketplace</small></span>
+    </a>
+    <div class="header-actions"><a href="#help">Bantuan</a><a href="admin.html" class="admin-link">Admin</a></div>
+  </header>
+
+  <main>
+    <section class="search-wrap"><div class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Cari aplikasi premium, streaming, AI, game..." /></div></section>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-badge"><span>🌸</span><div><b>Lilacmart Store</b><small>✓ Official Marketplace</small></div></div>
+        <p class="hero-copy">☰ ☷ <b>Lilacmart</b> ♡ ✧ ───── 🎀<br>laman terpercaya dengan aplikasi premium berkualitas ✿ menyajikan pelayanan bintang lima ✿ welcome to ethereal page! ♡</p>
+        <div class="stats"><div><b id="statProducts">0</b><small>PRODUK AKTIF</small></div><div><b>100%</b><small>GARANSI LAYANAN</small></div><div><b>Fast</b><small>RESPONSE CS</small></div></div>
+      </div>
+    </section>
+
+    <div class="ticker"><span>Disney+ Hotstar</span><span>✦ Spotify Premium</span><span>✦ Canva</span><span>✦ AI Premium</span></div>
+
+    <section class="section" id="catalog">
+      <div class="section-title"><div><h1>▰ Kategori Produk</h1><p id="productCount">0 produk ready</p></div></div>
+      <div class="chips" id="categoryChips"></div>
+      <div class="products" id="productGrid"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <a class="active" href="#catalog">▦<span>Katalog</span></a>
+    <a href="#reviews">★<span>Ulasan</span></a>
+    <a href="#help">ⓘ<span>Bantuan</span></a>
+    <button id="cartBtn">♧<span>Keranjang <em id="cartCount">0</em></span></button>
+  </nav>
+
+  <div class="modal" id="cartModal" aria-hidden="true">
+    <div class="modal-card"><button class="close" id="closeCart">×</button><h2>Keranjang</h2><div id="cartItems"></div><div class="cart-total"><span>Total</span><b id="cartTotal">Rp0</b></div><button class="primary" id="checkoutBtn">Lanjut Auto Order</button></div>
+  </div>
+
+  <div class="modal" id="checkoutModal" aria-hidden="true">
+    <div class="modal-card"><button class="close" id="closeCheckout">×</button><h2>Auto Order</h2><p class="muted">Isi data pembeli. Demo ini menyimpan pesanan ke browser dan panel admin.</p><form id="checkoutForm"><label>Nama<input required name="name" /></label><label>Email<input required type="email" name="email" /></label><label>Nomor WhatsApp<input required name="phone" placeholder="08xxxxxxxxxx" /></label><label>Metode pembayaran<select name="payment"><option>QRIS</option><option>Transfer Bank</option><option>E-Wallet</option></select></label><button class="primary" type="submit">Buat Pesanan</button></form><div id="orderResult"></div></div>
+  </div>
+
+  <footer id="help"><b>Lilacmart Store</b><p>Demo storefront auto order. Untuk pembayaran otomatis sungguhan, hubungkan backend + payment gateway.</p><p>© 2026 Lilacmart Store</p></footer>
+  <script src="app.js"></script>
+</body>
+</html>
